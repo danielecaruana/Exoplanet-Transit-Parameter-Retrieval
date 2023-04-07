@@ -69,7 +69,7 @@ if __name__ == '__main__':
         labels = ['a', 'b', 'c', 'd']
         print("Done")
         fig = corner.corner(samples, show_titles=True, labels=labels, plot_datapoints=True, quantiles=[0.32, 0.5, 0.68])
-        plt.savefig("corner.png")
+        plt.savefig("corner_sine.png")
 # Value Checking from plot
 
 # plt.plot(df['x'], df['y'])

@@ -38,10 +38,7 @@ def _p0(initial_val, n_dim_val, n_walkers_val):
 
 
 def mcmc(p0, n_walkers, n_iter, n_dim, ln_prob, data_tup, pool):
-    filename = "savefile_correct.h5"
-    backend = emcee.backends.HDFBackend(filename)
-    backend.reset(n_walkers, n_dim)
-    sampler_val = emcee.EnsembleSampler(n_walkers, n_dim, ln_prob, args=data_tup, backend=backend, pool=pool)
+    sampler_val = emcee.EnsembleSampler(n_walkers, n_dim, ln_prob, args=data_tup, pool=pool)
     print("Running burn-in...")
     p0, _, _ = sampler_val.run_mcmc(p0, 800, progress=True)
     sampler_val.reset()
@@ -70,12 +67,6 @@ if __name__ == '__main__':
 
         # Corner Plot
         labels = ['a', 'b', 'c', 'd']
-        # reader = emcee.backends.HDFBackend("savefile")
-        # burnin = int(2 * np.max(tau))
-        # thin = int(0.5 * np.min(tau))
-        # samples = reader.get_chain(discard=burnin, flat=True, thin=thin)
-        # log_prob_samples = reader.get_log_prob(discard=burnin, flat=True, thin=thin)
-        # log_prior_samples = reader.get_blobs(discard=burnin, flat=True, thin=thin)
         print("Done")
         fig = corner.corner(samples, show_titles=True, labels=labels, plot_datapoints=True, quantiles=[0.32, 0.5, 0.68])
         plt.savefig("corner.png")

@@ -69,7 +69,7 @@ plt.minorticks_on()
 plt.grid(which='both')
 formatter = mticker.ScalarFormatter(useMathText=True)
 ax.xaxis.set_major_formatter(formatter)
-# plt.savefig('uniform.pdf')
+plt.savefig('uniform.eps')
 plt.show()
 
 #  Generating a linear model
@@ -90,9 +90,8 @@ plt.minorticks_on()
 plt.grid(which='both')
 formatter = mticker.ScalarFormatter(useMathText=True)
 ax.xaxis.set_major_formatter(formatter)
-# plt.savefig('linear.pdf')
+plt.savefig('linear.eps')
 plt.show()
-
 
 # Generating a quadratic model
 
@@ -112,7 +111,7 @@ plt.minorticks_on()
 plt.grid(which='both')
 formatter = mticker.ScalarFormatter(useMathText=True)
 ax.xaxis.set_major_formatter(formatter)
-# plt.savefig('quadratic.pdf')
+plt.savefig('quadratic.eps')
 plt.show()
 
 print("Debug")

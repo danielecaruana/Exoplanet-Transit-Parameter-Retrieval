@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 
 
 def model(theta, x):
-
     t0, per, rp, a, inc = theta
     params = bat.TransitParams()
     params.w = 0
@@ -34,7 +33,8 @@ def ln_like(theta, x, y, y_err):
 
 def ln_prior(theta):
     t0, per, rp, a, inc = theta
-    if (0.6+2.453989e6 <= t0 <= 0.8+2.453989e6) and (2.43 <= per <= 2.65) and (0.09 <= rp <= 0.15) and (7.3 <= a <= 7.8) and 60 <= inc <= 90:
+    if (0.71 + 2.453989e6 <= t0 <= 0.78 + 2.453989e6) and (2.43 <= per <= 2.65) and (0.09 <= rp <= 0.15) and (
+            7.3 <= a <= 7.8) and 60 <= inc <= 90:
         return 0
     else:
         return -np.inf
@@ -58,7 +58,7 @@ def _p0(initial_val, n_dim_val, n_walkers_val):
 def mcmc(p0, n_walkers, n_iter, n_dim, ln_prob, data_tup, pool):
     sampler_val = emcee.EnsembleSampler(n_walkers, n_dim, ln_prob, args=data_tup, pool=pool)
     print("Running burn-in...")
-    p0, _, _ = sampler_val.run_mcmc(p0, 1050, progress=True)
+    p0, _, _ = sampler_val.run_mcmc(p0, 1500, progress=True)
     sampler_val.reset()
 
     print("Running production...")
@@ -74,15 +74,15 @@ time_arr = np.linspace(np.min(df['HJD'].to_numpy()), np.max(df['HJD'].to_numpy()
 data = (time_arr, df['Rel_Flux'], df['Flux_err'])
 
 n_walkers = 100
-n_iter = 3000
+n_iter = 10000
 
-initial = np.array([0.75+2.453989e6, 2.5, 0.12, 7.6, 90])
+initial = np.array([0.75 + 2.453989e6, 2.5, 0.12, 7.6, 90])
 n_dim = len(initial)
 
 p0 = _p0(initial, n_dim, n_walkers)
 
 if __name__ == '__main__':
-    with multiprocessing.Pool(4) as pool:
+    with multiprocessing.Pool(2) as pool:
         sampler, posteriors, prob, state = mcmc(p0, n_walkers, n_iter, n_dim, ln_prob, data, pool)
         samples = sampler.flatchain
 

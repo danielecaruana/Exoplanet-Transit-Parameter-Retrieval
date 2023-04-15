@@ -91,7 +91,7 @@ plt.grid(which='both')
 formatter = mticker.ScalarFormatter(useMathText=True)
 ax.xaxis.set_major_formatter(formatter)
 ax.get_yaxis().get_major_formatter().set_useOffset(False)
-plt.savefig('linear.eps')
+plt.savefig('linear.png')
 plt.show()
 
 # Generating a quadratic model
@@ -113,7 +113,7 @@ plt.grid(which='both')
 formatter = mticker.ScalarFormatter(useMathText=True)
 ax.xaxis.set_major_formatter(formatter)
 ax.get_yaxis().get_major_formatter().set_useOffset(False)
-plt.savefig('quadratic.eps')
+plt.savefig('quadratic.png')
 plt.show()
 
 print("Debug")

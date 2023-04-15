@@ -48,8 +48,8 @@ df['a / R'] = df['Semimajor Axis (AU)'] * 1.496e8 / k_90_rad
 # Initializing arrays
 time_arr = np.linspace(-0.7, 0.7, 1000)
 planet_arr = np.array(df.index.values.tolist())
-c1 = [0.1, 0.3, 0.5, 0.7, 0.9]
-c2 = [0.8, 0.5, 0.2, 0.1, 0.7]
+c1 = [0.1, 0.3, 0.5, 0.7, 0.8]
+c2 = [0.8, 0.7, 0.5, 0.4, 0.3]
 
 # Generating uniform models for all planets
 
@@ -69,7 +69,7 @@ plt.minorticks_on()
 plt.grid(which='both')
 formatter = mticker.ScalarFormatter(useMathText=True)
 ax.xaxis.set_major_formatter(formatter)
-plt.savefig('uniform.eps')
+plt.savefig('uniform.png')
 plt.show()
 
 #  Generating a linear model
@@ -79,7 +79,7 @@ ax.figure.set_size_inches(8.27, 11.69)
 for i in c1:
     m = bat.TransitModel(transit(df.loc['Kepler-90 e'], 'l', i), time_arr)
     rel_flux = m.light_curve(transit(df.loc['Kepler-90 e'], 'l', i))
-    plt.plot(time_arr, rel_flux, label=("$c_1 =$", i))
+    plt.plot(time_arr, rel_flux, label=r"$c_1 = {}$".format(i))
 
 csfont = {'fontname': 'Times New Roman'}
 plt.ylabel(r"Relative Flux", **csfont)
@@ -90,6 +90,7 @@ plt.minorticks_on()
 plt.grid(which='both')
 formatter = mticker.ScalarFormatter(useMathText=True)
 ax.xaxis.set_major_formatter(formatter)
+ax.get_yaxis().get_major_formatter().set_useOffset(False)
 plt.savefig('linear.eps')
 plt.show()
 
@@ -98,9 +99,9 @@ plt.show()
 fig, ax = plt.subplots(1)
 ax.figure.set_size_inches(8.27, 11.69)
 for i in range(len(c1)):
-    m = bat.TransitModel(transit(df.loc['Kepler-90 e'], 'l', c1[i], c2[i]), time_arr)
-    rel_flux = m.light_curve(transit(df.loc['Kepler-90 e'], 'l', c1[i], c2[1]))
-    plt.plot(time_arr, rel_flux, label=("$c_1 =$", c1[i], "c_2 =", c2[i]))
+    m = bat.TransitModel(transit(df.loc['Kepler-90 e'], 'q', c1[i], c2[i]), time_arr)
+    rel_flux = m.light_curve(transit(df.loc['Kepler-90 e'], 'q', c1[i], c2[i]))
+    plt.plot(time_arr, rel_flux, label=r"$c_1 = {}, c_2 = {}$".format(c1[i], c2[i]))
 
 csfont = {'fontname': 'Times New Roman'}
 plt.ylabel(r"Relative Flux", **csfont)
@@ -111,6 +112,7 @@ plt.minorticks_on()
 plt.grid(which='both')
 formatter = mticker.ScalarFormatter(useMathText=True)
 ax.xaxis.set_major_formatter(formatter)
+ax.get_yaxis().get_major_formatter().set_useOffset(False)
 plt.savefig('quadratic.eps')
 plt.show()
 

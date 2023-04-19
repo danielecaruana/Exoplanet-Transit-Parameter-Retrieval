@@ -52,6 +52,17 @@ def mcmc(p0, n_walkers, n_iter, n_dim, ln_prob, data_tup, pool):
 df = pd.read_csv('mcmc_intro_group_5.csv')
 data = (df['x'], df['y'], df['y_err'])
 
+# Value Checking from plot
+
+plt.plot(df['x'], df['y'])
+plt.axhline(y=32)
+plt.minorticks_on()
+plt.grid(which='both')
+plt.xlabel("X")
+plt.ylabel("Y")
+plt.savefig("Sine")
+plt.show()
+
 n_walkers = 100
 n_iter = 3000
 
@@ -70,10 +81,6 @@ if __name__ == '__main__':
         print("Done")
         fig = corner.corner(samples, show_titles=True, labels=labels, plot_datapoints=True, quantiles=[0.32, 0.5, 0.68])
         plt.savefig("corner_sine.png")
-# Value Checking from plot
 
-# plt.plot(df['x'], df['y'])
-# plt.axhline(y=32)
-# plt.show()
 
 print("Debug")

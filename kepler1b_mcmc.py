@@ -112,7 +112,7 @@ if __name__ == '__main__':
 
         th_max = samples[np.argmax(sampler.flatlnprobability)]
         best_fit = model(th_max, time_arr)
-        med_mod_val, spread_val = posteriors_func(100, samples, time_arr)
+        med_mod_val, spread_val = posteriors_func(600, samples, time_arr)
 
         fig, ax = plt.subplots(1)
         ax.figure.set_size_inches(8.27, 11.69)

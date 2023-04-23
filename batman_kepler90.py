@@ -48,7 +48,7 @@ df['a / R'] = df['Semimajor Axis (AU)'] * 1.496e8 / k_90_rad
 # Initializing arrays
 time_arr = np.linspace(-0.7, 0.7, 1000)
 planet_arr = np.array(df.index.values.tolist())
-c1 = [0.1, 0.3, 0.5, 0.7, 0.8]
+c1 = [0.5, 0.5, 0.5, 0.5, 0.5]
 c2 = [0.8, 0.7, 0.5, 0.4, 0.3]
 
 # Generating uniform models for all planets

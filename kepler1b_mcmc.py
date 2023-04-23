@@ -84,8 +84,16 @@ if __name__ == '__main__':
         df = pd.read_csv("kepler_lc_group_4.csv")
 
         time_arr = np.linspace(np.min(df['HJD'].to_numpy()), np.max(df['HJD'].to_numpy()), 433)
-
+    
         data = (time_arr, df['Rel_Flux'], df['Flux_err'])
+        plt.plot(time_arr, df['Rel_Flux'])
+        plt.xlabel('HJD')
+        plt.ylabel('Relative Flux')
+        plt.minorticks_on()
+        plt.grid(which='both')
+        plt.savefig("Init")
+        plt.show()
+
 
         n_walkers = 250
         n_iter = 5000

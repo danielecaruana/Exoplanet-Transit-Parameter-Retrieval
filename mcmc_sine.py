@@ -54,8 +54,8 @@ data = (df['x'], df['y'], df['y_err'])
 
 # Value Checking from plot
 
-plt.plot(df['x'], df['y'])
-plt.axhline(y=32)
+plt.plot(df['x'], df['y'], color='black')
+plt.axhline(y=32, color='black')
 plt.minorticks_on()
 plt.grid(which='both')
 plt.xlabel("X")
@@ -79,6 +79,8 @@ if __name__ == '__main__':
         # Corner Plot
         labels = ['a', 'b', 'c', 'd']
         print("Done")
+        fig, ax = plt.subplots(1)
+        ax.figure.set_size_inches(8.27, 11.69)
         fig = corner.corner(samples, show_titles=True, labels=labels, plot_datapoints=True, quantiles=[0.32, 0.5, 0.68])
         plt.savefig("corner_sine.png")
 
